@@ -1,4 +1,4 @@
-- SimpleInventorySistem
+# SimpleInventorySistem
   - Tech Stack
     - Java
     - Postgres
