@@ -1,39 +1,45 @@
 package testing.java.fx.testingjavafx.category.model;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import jakarta.persistence.*;
 
-public class Category
-{
-    private StringProperty categoryName;
-    private StringProperty status;
+@Entity
+@Table(name = "category")
+public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false)
+    private String brandName;
+    @Column(nullable = false)
+    private String status;
 
-    public Category(String categoryName, String status) {
-        this.categoryName = new SimpleStringProperty(categoryName);
-        this.status = new SimpleStringProperty(status);
+    public Category() {}
+    public Category(String brandName, String status) {
+        this.brandName = brandName;
+        this.status = status;
     }
 
-    public String getCategoryName() {
-        return categoryName.get();
+    public Long getId() {
+        return id;
     }
 
-    public StringProperty categoryNameProperty() {
-        return categoryName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName.set(categoryName);
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
     public String getStatus() {
-        return status.get();
-    }
-
-    public StringProperty statusProperty() {
         return status;
     }
 
     public void setStatus(String status) {
-        this.status.set(status);
+        this.status = status;
     }
 }
