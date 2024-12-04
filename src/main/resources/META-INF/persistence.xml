@@ -5,6 +5,7 @@
     <persistence-unit name="sqlite-jpa-unit" transaction-type="RESOURCE_LOCAL">
         <class>testing.java.fx.testingjavafx.store.model.StoreDB</class>
         <class>testing.java.fx.testingjavafx.attribute.model.AttributeDB</class>
+        <class>testing.java.fx.testingjavafx.attributevalue.model.AttributeValueDB</class>
         <properties>
             <!-- Database Configuration -->
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/inventory"/>

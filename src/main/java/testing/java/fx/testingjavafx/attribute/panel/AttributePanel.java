@@ -5,25 +5,51 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import testing.java.fx.testingjavafx.attribute.model.AttributeDB;
 import testing.java.fx.testingjavafx.attribute.viewmodel.AttributeVM;
 import testing.java.fx.testingjavafx.dbutil.DBUtil;
+import testing.java.fx.testingjavafx.store.model.StoreDB;
+import testing.java.fx.testingjavafx.store.viewmodel.StoreVM;
 
 public class AttributePanel extends VBox {
+
+    private ObservableList<AttributeVM> data;
+    private TableView<AttributeVM> tableView;
+
     public AttributePanel() {
         this.setStyle("-fx-background-color: #D3D3D3; -fx-padding: 10;");
         Button addCategory = new Button("Add Attribute");
 
-        TableView<AttributeVM> tableView = new TableView<AttributeVM>();
+        tableView = new TableView<AttributeVM>();
         TableColumn<AttributeVM, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().attributeNameProperty());
-        nameColumn.setPrefWidth(500);
+        nameColumn.setPrefWidth(150);
 
         TableColumn<AttributeVM, String> ageColumn = new TableColumn<>("Status");
         ageColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
-        ageColumn.setPrefWidth(500);
-        tableView.getColumns().addAll(nameColumn, ageColumn);
+        ageColumn.setPrefWidth(150);
 
-        ObservableList<AttributeVM> data = FXCollections.observableArrayList();
+        TableColumn<AttributeVM, String> actionColumn = new TableColumn<>("Action");
+        actionColumn.setPrefWidth(150);
+        actionColumn.setCellFactory(col -> new TableCell() {
+            private final Button button = new Button("+");
+            {
+                button.setOnAction(event -> {
+
+                });
+            }
+
+            @Override
+            public void updateItem(Object item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : button);
+            }
+        });
+
+
+        tableView.getColumns().addAll(nameColumn, ageColumn, actionColumn);
+
+        data = FXCollections.observableArrayList();
         tableView.setItems(data);
         tableView.refresh();
         getChildren().add(addCategory);
@@ -55,8 +81,8 @@ public class AttributePanel extends VBox {
                 if (response == buttonTypeYes) {
                     EntityManager em = DBUtil.getEntityManager();
                     em.getTransaction().begin();
-                    AttributeVM attributeVM = new AttributeVM(categoryName.getText(), comboBoxStatus.getValue().toString());
-                    em.persist(attributeVM);
+                    AttributeDB attributeDB = new AttributeDB(categoryName.getText(), comboBoxStatus.getValue().toString());
+                    em.persist(attributeDB);
                     em.getTransaction().commit();
 
                     data.add(new AttributeVM(categoryName.getText(), comboBoxStatus.getValue().toString()));
@@ -69,6 +95,17 @@ public class AttributePanel extends VBox {
             });
 
 
+        });
+
+        setupAttribute();
+    }
+
+    public void setupAttribute(){
+        EntityManager em = DBUtil.getEntityManager();
+        em.createQuery("SELECT s FROM AttributeDB s", AttributeDB.class).getResultList().forEach(attributeDB -> {
+            data.add(new AttributeVM(attributeDB.getAttributeName(), attributeDB.getStatus()));
+            tableView.setItems(data);
+            tableView.refresh();
         });
     }
 }

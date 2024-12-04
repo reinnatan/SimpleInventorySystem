@@ -1,6 +1,7 @@
 package testing.java.fx.testingjavafx.attribute.model;
 
 import jakarta.persistence.*;
+import testing.java.fx.testingjavafx.attributevalue.model.AttributeValueDB;
 
 import java.util.List;
 
@@ -16,7 +17,8 @@ public class AttributeDB {
     @Column(nullable = false)
     private String status;
 
-    private List<AttributeDB> listAttributes;
+    @OneToMany
+    private List<AttributeValueDB> listAttributes;
 
     public AttributeDB() {}
 
@@ -49,11 +51,11 @@ public class AttributeDB {
         this.id = id;
     }
 
-    public List<AttributeDB> getListAttributes() {
+    public List<AttributeValueDB> getListAttributes() {
         return listAttributes;
     }
 
-    public void setListAttributes(List<AttributeDB> listAttributes) {
+    public void setListAttributes(List<AttributeValueDB> listAttributes) {
         this.listAttributes = listAttributes;
     }
 }

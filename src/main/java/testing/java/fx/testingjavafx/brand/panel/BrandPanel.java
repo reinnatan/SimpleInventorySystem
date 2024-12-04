@@ -4,24 +4,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import testing.java.fx.testingjavafx.brand.model.Brand;
+import testing.java.fx.testingjavafx.brand.viewmodel.BrandVM;
 
 public class BrandPanel extends VBox {
     public BrandPanel() {
         this.setStyle("-fx-background-color: #D3D3D3; -fx-padding: 10;");
         Button addCategory = new Button("Add Brand");
 
-        TableView<Brand> tableView = new TableView<Brand>();
-        TableColumn<Brand, String> nameColumn = new TableColumn<>("Name");
+        TableView<BrandVM> tableView = new TableView<BrandVM>();
+        TableColumn<BrandVM, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().brandNameProperty());
         nameColumn.setPrefWidth(500);
 
-        TableColumn<Brand, String> ageColumn = new TableColumn<>("Status");
+        TableColumn<BrandVM, String> ageColumn = new TableColumn<>("Status");
         ageColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
         ageColumn.setPrefWidth(500);
         tableView.getColumns().addAll(nameColumn, ageColumn);
 
-        ObservableList<Brand> data = FXCollections.observableArrayList();
+        ObservableList<BrandVM> data = FXCollections.observableArrayList();
         tableView.setItems(data);
         tableView.refresh();
         getChildren().add(addCategory);
@@ -51,7 +51,7 @@ public class BrandPanel extends VBox {
             alert.getDialogPane().getButtonTypes().addAll(buttonTypeYes, buttonTypeCancel);
             alert.showAndWait().ifPresent(response -> {
                 if (response == buttonTypeYes) {
-                    data.add(new Brand(categoryName.getText(), comboBoxStatus.getValue().toString()));
+                    data.add(new BrandVM(categoryName.getText(), comboBoxStatus.getValue().toString()));
                     tableView.setItems(data);
                     tableView.refresh();
                     System.out.println("You clicked Yes!");

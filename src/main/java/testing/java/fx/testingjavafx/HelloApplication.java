@@ -31,8 +31,6 @@ public class HelloApplication extends Application implements EventHandler {
         VBox leftMenu = new VBox(10); // Vertical layout with spacing
         leftMenu.setStyle("-fx-background-color: #D3D3D3; -fx-padding: 10;"); // Light gray background
 
-
-
         CategoryPanel categoryPanel = new CategoryPanel();
         BrandPanel brandPanel = new BrandPanel();
         StorePanel storePanel = new StorePanel();
