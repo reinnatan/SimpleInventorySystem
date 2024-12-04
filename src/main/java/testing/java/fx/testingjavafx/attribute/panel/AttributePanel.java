@@ -7,18 +7,26 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import testing.java.fx.testingjavafx.attribute.model.AttributeDB;
 import testing.java.fx.testingjavafx.attribute.viewmodel.AttributeVM;
+import testing.java.fx.testingjavafx.attributevalue.panel.AttributeValuePanel;
 import testing.java.fx.testingjavafx.dbutil.DBUtil;
 import testing.java.fx.testingjavafx.store.model.StoreDB;
 import testing.java.fx.testingjavafx.store.viewmodel.StoreVM;
 
 public class AttributePanel extends VBox {
 
+    public interface AttributeValueInterface {
+        void changeToAttributeValuePanel(AttributeValuePanel attributeValuePanel);
+        void changeToAttributePanel(AttributePanel attributePanel);
+    }
+
     private ObservableList<AttributeVM> data;
     private TableView<AttributeVM> tableView;
+    private AttributeValueInterface attributeValueInterface;
 
-    public AttributePanel() {
+    public AttributePanel(AttributeValueInterface attributeValueInterface) {
         this.setStyle("-fx-background-color: #D3D3D3; -fx-padding: 10;");
         Button addCategory = new Button("Add Attribute");
+        this.attributeValueInterface  =  attributeValueInterface;
 
         tableView = new TableView<AttributeVM>();
         TableColumn<AttributeVM, String> nameColumn = new TableColumn<>("Name");
@@ -35,7 +43,8 @@ public class AttributePanel extends VBox {
             private final Button button = new Button("+");
             {
                 button.setOnAction(event -> {
-
+                    AttributeValuePanel attributeValuePanel = new AttributeValuePanel(AttributePanel.this,attributeValueInterface);
+                    attributeValueInterface.changeToAttributeValuePanel(attributeValuePanel);
                 });
             }
 

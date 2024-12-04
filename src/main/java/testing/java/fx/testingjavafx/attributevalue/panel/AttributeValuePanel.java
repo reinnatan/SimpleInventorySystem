@@ -4,14 +4,21 @@ import jakarta.persistence.EntityManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import testing.java.fx.testingjavafx.attribute.panel.AttributePanel;
 import testing.java.fx.testingjavafx.attribute.viewmodel.AttributeVM;
 import testing.java.fx.testingjavafx.dbutil.DBUtil;
 
 public class AttributeValuePanel extends VBox {
-    public AttributeValuePanel() {
+
+    public AttributeValuePanel(AttributePanel attributePanel ,AttributePanel.AttributeValueInterface attributeValueInterface){
         this.setStyle("-fx-background-color: #D3D3D3; -fx-padding: 10;");
-        Button addCategory = new Button("Add Value Attribute");
+        HBox panelButton = new HBox();
+
+        Button addAttributeValue = new Button("Add Value Attribute");
+        Button backAttributePanel = new Button("<-");
+        panelButton.getChildren().addAll(backAttributePanel, addAttributeValue);
 
         TableView<AttributeVM> tableView = new TableView<AttributeVM>();
         TableColumn<AttributeVM, String> nameColumn = new TableColumn<>("Name");
@@ -26,10 +33,10 @@ public class AttributeValuePanel extends VBox {
         ObservableList<AttributeVM> data = FXCollections.observableArrayList();
         tableView.setItems(data);
         tableView.refresh();
-        getChildren().add(addCategory);
+        getChildren().add(panelButton);
         getChildren().add(tableView);
 
-        addCategory.setOnAction(e -> {
+        addAttributeValue.setOnAction(e -> {
             Dialog alert = new Dialog();
             alert.setTitle("Add Brand");
             VBox boxContent = new VBox();
@@ -67,8 +74,10 @@ public class AttributeValuePanel extends VBox {
                     System.out.println("You clicked Cancel!");
                 }
             });
+        });
 
-
+        backAttributePanel.setOnAction(value -> {
+            attributeValueInterface.changeToAttributePanel(attributePanel);
         });
     }
 }
