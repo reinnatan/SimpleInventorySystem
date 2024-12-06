@@ -1,6 +1,7 @@
 package testing.java.fx.testingjavafx.attributevalue.model;
 
 import jakarta.persistence.*;
+import testing.java.fx.testingjavafx.attribute.model.AttributeDB;
 
 @Entity
 @Table(name = "attribute_value")
@@ -10,12 +11,18 @@ public class AttributeValueDB {
     private Long id;
     @Column(nullable = false)
     private String attributValue;
+    @Column(nullable = false)
+    private String status;
 
-    public AttributeValueDB() {}
+    @ManyToOne
+    @JoinColumn(name = "attribute_id")
+    private AttributeDB attributeDB;
 
-    public AttributeValueDB(Long id, String attributValue) {
-        this.id = id;
+    public AttributeValueDB(){}
+
+    public AttributeValueDB(String attributValue, String status) {
         this.attributValue = attributValue;
+        this.status = status;
     }
 
     public Long getId() {
@@ -32,5 +39,21 @@ public class AttributeValueDB {
 
     public void setAttributValue(String attributValue) {
         this.attributValue = attributValue;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public AttributeDB getAttributeDB() {
+        return attributeDB;
+    }
+
+    public void setAttributeDB(AttributeDB attributeDB) {
+        this.attributeDB = attributeDB;
     }
 }

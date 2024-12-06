@@ -17,7 +17,7 @@ public class AttributeDB {
     @Column(nullable = false)
     private String status;
 
-    @OneToMany
+    @OneToMany(mappedBy = "attributeDB", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AttributeValueDB> listAttributes;
 
     public AttributeDB() {}
