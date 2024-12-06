@@ -64,8 +64,6 @@ public class AttributeValuePanel extends VBox {
             ButtonType buttonTypeYes = new ButtonType("Yes");
             ButtonType buttonTypeCancel = new ButtonType("Cancel");
 
-
-
             alert.getDialogPane().getButtonTypes().addAll(buttonTypeYes, buttonTypeCancel);
             alert.showAndWait().ifPresent(response -> {
                 if (response == buttonTypeYes) {
