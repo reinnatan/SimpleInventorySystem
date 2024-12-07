@@ -85,8 +85,9 @@ public class HelloApplication extends Application implements EventHandler, Attri
         });
 
         // Scene
-        Scene scene = new Scene(layout, 1200, 800);
-        stage.setTitle("JavaFX Left and Right Menu Example");
+        Scene scene = new Scene(layout, 1200, 1200);
+        stage.setTitle("Simple Inventory System");
+        //stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
     }
