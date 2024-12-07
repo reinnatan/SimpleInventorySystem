@@ -37,7 +37,6 @@ public class HelloApplication extends Application implements EventHandler, Attri
         BrandPanel brandPanel = new BrandPanel();
         StorePanel storePanel = new StorePanel();
         AttributePanel attributePanel = new AttributePanel(this);
-
         Button categoryButton = new Button("Category");
         categoryButton.setPrefWidth(100);
         Button brandButton = new Button("Brand");
@@ -46,12 +45,21 @@ public class HelloApplication extends Application implements EventHandler, Attri
         attributeButton.setPrefWidth(100);
         Button storeButton = new Button("Store");
         storeButton.setPrefWidth(100);
+        Button buttonProducts = new Button("Products");
+        buttonProducts.setPrefWidth(100);
+        Button buttonOrder = new Button("Orders");
+        buttonProducts.setPrefWidth(100);
+
+        VBox productsContainer = new VBox();
+        productsContainer.getChildren().add(buttonProducts);
 
         leftMenu.getChildren().addAll(
                 categoryButton,
                 brandButton,
                 attributeButton,
-                storeButton
+                storeButton,
+                productsContainer,
+                buttonOrder
         );
 
         // Layout
@@ -82,6 +90,28 @@ public class HelloApplication extends Application implements EventHandler, Attri
             mainContainer.getChildren().clear();
             mainContainer.getChildren().add(attributePanel);
             attributePanel.setupTableAttribute();
+        });
+
+
+        //setup section products
+        Button addProducts = new Button("Add Products");
+        addProducts.setPrefWidth(100);
+        productsContainer.setSpacing(10);
+        productsContainer.getChildren().add(addProducts);
+        Button manageProducts = new Button("Manage Products");
+        productsContainer.getChildren().add(manageProducts);
+        manageProducts.setPrefWidth(100);
+        productsContainer.setSpacing(10);
+        productsContainer.getChildren().remove(addProducts);
+        productsContainer.getChildren().remove(manageProducts);
+        buttonProducts.setOnAction(e -> {
+                if(productsContainer.getChildren().contains(addProducts)) {
+                    productsContainer.getChildren().remove(addProducts);
+                    productsContainer.getChildren().remove(manageProducts);
+                }else {
+                    productsContainer.getChildren().add(addProducts);
+                    productsContainer.getChildren().add(manageProducts);
+                }
         });
 
         // Scene
