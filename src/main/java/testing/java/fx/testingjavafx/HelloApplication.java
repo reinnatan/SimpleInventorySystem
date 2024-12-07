@@ -49,7 +49,7 @@ public class HelloApplication extends Application implements EventHandler, Attri
         Button buttonProducts = new Button("Products");
         buttonProducts.setPrefWidth(100);
         Button buttonOrder = new Button("Orders");
-        buttonProducts.setPrefWidth(100);
+        buttonOrder.setPrefWidth(100);
 
         VBox productsContainer = new VBox();
         productsContainer.getChildren().add(buttonProducts);
