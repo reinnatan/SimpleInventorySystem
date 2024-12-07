@@ -77,16 +77,18 @@ public class StorePanel extends VBox {
                 }
             });
 
-
+            setupDataToko();
         });
     }
 
     public void setupDataToko(){
+        data.clear();
         EntityManager em = DBUtil.getEntityManager();
         em.createQuery("SELECT s FROM StoreDB s", StoreDB.class).getResultList().forEach(storeDB -> {
             data.add(new StoreVM(storeDB.getStoreName(), storeDB.getStatus()));
-            tableView.setItems(data);
-            tableView.refresh();
         });
+
+        tableView.setItems(data);
+        tableView.refresh();
     }
 }

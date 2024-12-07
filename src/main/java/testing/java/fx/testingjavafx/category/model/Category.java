@@ -9,13 +9,13 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String brandName;
+    private String categoryName;
     @Column(nullable = false)
     private String status;
 
     public Category() {}
-    public Category(String brandName, String status) {
-        this.brandName = brandName;
+    public Category(String categoryName, String status) {
+        this.categoryName = categoryName;
         this.status = status;
     }
 
@@ -27,12 +27,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public String getStatus() {

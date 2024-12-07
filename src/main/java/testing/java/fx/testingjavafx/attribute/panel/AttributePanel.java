@@ -9,10 +9,6 @@ import testing.java.fx.testingjavafx.attribute.model.AttributeDB;
 import testing.java.fx.testingjavafx.attribute.viewmodel.AttributeVM;
 import testing.java.fx.testingjavafx.attributevalue.panel.AttributeValuePanel;
 import testing.java.fx.testingjavafx.dbutil.DBUtil;
-import testing.java.fx.testingjavafx.store.model.StoreDB;
-import testing.java.fx.testingjavafx.store.viewmodel.StoreVM;
-
-import java.util.List;
 
 public class AttributePanel extends VBox {
 
@@ -101,7 +97,7 @@ public class AttributePanel extends VBox {
                     em.persist(attributeDB);
                     em.getTransaction().commit();
 
-                    data.add(new AttributeVM(0L, categoryName.getText(), comboBoxStatus.getValue().toString()));
+                    data.add(new AttributeVM(attributeDB.getId(), categoryName.getText(), comboBoxStatus.getValue().toString()));
                     tableView.setItems(data);
                     tableView.refresh();
                     System.out.println("You clicked Yes!");
@@ -110,13 +106,14 @@ public class AttributePanel extends VBox {
                 }
             });
 
-
+            setupTableAttribute();
         });
 
-        setupAttribute();
+
     }
 
-    public void setupAttribute(){
+    public void setupTableAttribute(){
+        data.clear();
         EntityManager em = DBUtil.getEntityManager();
         em.createQuery("SELECT s FROM AttributeDB s", AttributeDB.class).getResultList().forEach(attributeDB -> {
             data.add(new AttributeVM(attributeDB.getId(), attributeDB.getAttributeName(), attributeDB.getStatus()));

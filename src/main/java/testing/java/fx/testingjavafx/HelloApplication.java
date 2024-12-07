@@ -63,21 +63,25 @@ public class HelloApplication extends Application implements EventHandler, Attri
         categoryButton.setOnAction(e -> {
             mainContainer.getChildren().clear();
             mainContainer.getChildren().add(categoryPanel);
+            categoryPanel.setupTableView();
         });
 
         brandButton.setOnAction(e -> {
             mainContainer.getChildren().clear();
             mainContainer.getChildren().add(brandPanel);
+            brandPanel.setupTableView();
         });
 
         storeButton.setOnAction(e -> {
             mainContainer.getChildren().clear();
             mainContainer.getChildren().add(storePanel);
+            storePanel.setupDataToko();
         });
 
         attributeButton.setOnAction(e -> {
             mainContainer.getChildren().clear();
             mainContainer.getChildren().add(attributePanel);
+            attributePanel.setupTableAttribute();
         });
 
         // Scene
