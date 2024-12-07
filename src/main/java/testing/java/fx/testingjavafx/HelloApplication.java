@@ -13,6 +13,7 @@ import testing.java.fx.testingjavafx.attribute.panel.AttributePanel;
 import testing.java.fx.testingjavafx.attributevalue.panel.AttributeValuePanel;
 import testing.java.fx.testingjavafx.brand.panel.BrandPanel;
 import testing.java.fx.testingjavafx.category.panel.CategoryPanel;
+import testing.java.fx.testingjavafx.product.panel.ProductsPanel;
 import testing.java.fx.testingjavafx.store.panel.StorePanel;
 
 import java.io.IOException;
@@ -94,6 +95,9 @@ public class HelloApplication extends Application implements EventHandler, Attri
 
 
         //setup section products
+
+        ProductsPanel productPanel = new ProductsPanel();
+
         Button addProducts = new Button("Add Products");
         addProducts.setPrefWidth(100);
         productsContainer.setSpacing(10);
@@ -112,6 +116,11 @@ public class HelloApplication extends Application implements EventHandler, Attri
                     productsContainer.getChildren().add(addProducts);
                     productsContainer.getChildren().add(manageProducts);
                 }
+        });
+
+        addProducts.setOnAction(e -> {
+            mainContainer.getChildren().clear();
+            mainContainer.getChildren().add(productPanel);
         });
 
         // Scene
