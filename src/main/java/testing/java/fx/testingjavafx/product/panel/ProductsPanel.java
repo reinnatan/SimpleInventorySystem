@@ -42,9 +42,9 @@ public class ProductsPanel extends VBox{
             alert.setWidth(400);
             alert.setHeight(400);
             VBox boxContent = new VBox();
-            boxContent.getChildren().add(new Label("Image Products"));
-            Button fileChooser = new Button("Image Products");
-            boxContent.getChildren().add(fileChooser);
+            //boxContent.getChildren().add(new Label("Image Products"));
+            //Button fileChooser = new Button("Image Products");
+            //boxContent.getChildren().add(fileChooser);
             boxContent.getChildren().add(new Label("Products Name"));
             TextField categoryName = new TextField();
             boxContent.getChildren().add(categoryName);
@@ -96,12 +96,7 @@ public class ProductsPanel extends VBox{
                     System.out.println("You clicked Cancel!");
                 }
             });
-
-
-
         });
-
-
     }
 
     public void setupTableView(){
